@@ -12,8 +12,8 @@ import java.io.Console;
  */
 public class Menu {
     public static void Login(){
-        System.out.println("Login" + System.lineSeparator()
-        + "Introduzca su usuario: ");
+        
+        System.out.println("Introduzca su usuario: ");
         String usuario = Entrada.RequestString();
         System.out.println("Introduzca su contraseña: ");
         String pass = Entrada.RequestString();

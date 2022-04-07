@@ -38,12 +38,17 @@ public class utils {
         return spaces;
     }
     public static String FormattingDetector(String inputString, int breakline){
-        String formattedtext = "";
+        
         System.out.println(Math.floor(inputString.length()/breakline));
-        for (int i = 0; i < Math.floor(inputString.length()/breakline); i++) {
-            formattedtext += inputString.substring((breakline*i), (breakline*(i+1)))
-                           + System.lineSeparator();
+        if(inputString.length() <= breakline){
+            return inputString;
+        } else {
+            String formattedtext = "";
+            for (int i = 0; i < Math.floor(inputString.length()/breakline); i++) {
+                formattedtext += inputString.substring((breakline*i), (breakline*(i+1)))
+                               + System.lineSeparator();
+            }
+            return formattedtext.substring(0,formattedtext.length() -1);
         }
-        return formattedtext.substring(0,formattedtext.length() -1);
     }
 }

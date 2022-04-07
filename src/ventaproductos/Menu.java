@@ -20,6 +20,13 @@ public class Menu {
         String usuario = Entrada.RequestString();
         System.out.println("Introduzca su contraseña: ");
         String pass = Entrada.RequestString();
-        db.validarLogin(usuario, pass);
+        if(db.validarLogin(usuario, pass) == true){
+            utils.clearScreen();
+            Store();
+        }
     }
+    private void Store(){
+        System.out.println("Tienda");
+    }
+    
 }

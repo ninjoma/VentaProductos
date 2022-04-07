@@ -17,4 +17,9 @@ public class Usuario {
         this.pass = pass;
         this.cliente_id = cliente_id;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
 }

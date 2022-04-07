@@ -7,8 +7,6 @@ package ventaproductos;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -31,5 +29,21 @@ public class utils {
             System.in.read();
         } catch (IOException ex) {
         }
+    }
+    public static String spaceGenerator(int count){
+        String spaces = "";
+        for (int i = 0; i < count; i++) {
+            spaces += " ";
+        }
+        return spaces;
+    }
+    public static String FormattingDetector(String inputString, int breakline){
+        String formattedtext = "";
+        System.out.println(Math.floor(inputString.length()/breakline));
+        for (int i = 0; i < Math.floor(inputString.length()/breakline); i++) {
+            formattedtext += inputString.substring((breakline*i), (breakline*(i+1)))
+                           + System.lineSeparator();
+        }
+        return formattedtext.substring(0,formattedtext.length() -1);
     }
 }

@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class DB {
     private Connection conn;
-    public DB() throws SQLException{
+    public DB(){
         try{
             conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XE", 
                     "nullsoft", "nullsoft");

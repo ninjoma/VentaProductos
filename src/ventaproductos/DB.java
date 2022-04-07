@@ -22,6 +22,7 @@ public class DB {
         try {
             conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XE",
                     "NULLSOFT", "NULLSOFT");
+            conn.setAutoCommit(true);
             System.out.println("Conexion a la base de datos correcta");
             if (conn == null) {
                 System.out.println("No se pudo conectar a la base de datos");
@@ -36,24 +37,24 @@ public class DB {
         try {
             Statement stmt = conn.createStatement();
             //String queryUsuario = "SELECT * FROM CLIENTE WHERE USUARIO= '" + usuario+"';";
-            String queryUsuario = "SELECT USUARIO FROM CLIENTE WHERE USUARIO='" + usuario +"'";
-            String queryContrasenya = "SELECT PASSW FROM CLIENTE WHERE PASSW= '" + pass +"'";
-            String queryid = "SELECT ID_CLIENTE FROM CLIENTE WHERE USUARIO= '" + usuario + "'" + 
-                    " AND PASSW= '" + pass+"'";
+            String queryUsuario = "SELECT * FROM CLIENTE";
+            String queryContrasenya = "SELECT PASSW FROM CLIENTE WHERE PASSW= '" + pass + "'";
+            String queryid = "SELECT ID_CLIENTE FROM CLIENTE WHERE USUARIO= '" + usuario + "'"
+                    + " AND PASSW= '" + pass + "'";
             ResultSet rs = stmt.executeQuery(queryUsuario);
-            
+
             if (rs.next() == false) {
-                System.out.println("aa");
                 return null;
             } else {
                 rs = stmt.executeQuery(queryContrasenya);
                 if (rs.next() == false) {
                     System.out.println("Contraseña incorrecta");
                     return null;
-                }else{
+                } else {
                     System.out.println("El usuario existe");
                     rs = stmt.executeQuery(queryid);
-                    clienteID =  ((Number) rs.getObject(1)).intValue();
+                    rs.next();
+                    clienteID = ((Number) rs.getObject(1)).intValue();
                     Usuario user = new Usuario(usuario, pass, clienteID);
                     System.out.println("El usuario existe");
                     return user;

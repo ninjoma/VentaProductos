@@ -22,7 +22,7 @@ public class VentaProductos {
     public static void main(String[] args) {
         try {
             Connection conn = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521/XE", "nullsoft", "nullsoft");
+                    "jdbc:oracle:thin:@localhost:1521/XE", "NULLSOFT", "NULLSOFT");
         } catch (SQLException ex) {
             Logger.getLogger(VentaProductos.class.getName()).log(Level.SEVERE, null, ex);
         }

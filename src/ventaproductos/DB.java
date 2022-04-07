@@ -17,7 +17,7 @@ public class DB {
     public DB(){
         try{
             conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XE", 
-                    "nullsoft", "nullsoft");
+                    "NULLSOFT", "NULLSOFT");
             if(conn == null){
                 System.out.println("No se pudo conectar a la base de datos");
             }

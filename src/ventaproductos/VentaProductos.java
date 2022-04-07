@@ -20,12 +20,7 @@ public class VentaProductos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
-            Connection conn = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521/XE", "NULLSOFT", "NULLSOFT");
-        } catch (SQLException ex) {
-            Logger.getLogger(VentaProductos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        DB db = new DB();
         System.out.println("¡Bienvenido a NullSoft Inc! Tu todo a cien online"
                 + " de confianza.");
         Menu.Login();

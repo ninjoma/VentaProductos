@@ -4,19 +4,22 @@
  */
 package ventaproductos;
 
-import java.io.Console;
 
 /**
  *
  * @author A8-PC79
  */
 public class Menu {
-    public static void Login(){
-        
+    private DB db = new DB();
+    public Menu(){
+        System.out.println("¡Bienvenido a NullSoft, tu todo a cien de confianza!");
+        Login();
+    }
+    private void Login(){
         System.out.println("Introduzca su usuario: ");
         String usuario = Entrada.RequestString();
         System.out.println("Introduzca su contraseña: ");
         String pass = Entrada.RequestString();
-        
+        db.validarLogin(usuario, pass);
     }
 }

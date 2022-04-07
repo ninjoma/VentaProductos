@@ -25,5 +25,8 @@ public class DB {
             System.err.format("SQL State: %s\n%s", Ex.getSQLState(), Ex.getMessage());
         }
     }
+    public boolean validarLogin(String usuario, String pass) {
+        
+    }
     
 }

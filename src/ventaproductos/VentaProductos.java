@@ -20,10 +20,7 @@ public class VentaProductos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        DB db = new DB();
-        System.out.println("¡Bienvenido a NullSoft Inc! Tu todo a cien online"
-                + " de confianza.");
-        Menu.Login();
+        Menu menu = new Menu();
     }
     
 }

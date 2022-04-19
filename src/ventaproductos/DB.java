@@ -36,8 +36,7 @@ public class DB {
         int clienteID;
         try {
             Statement stmt = conn.createStatement();
-            //String queryUsuario = "SELECT * FROM CLIENTE WHERE USUARIO= '" + usuario+"';";
-            String queryUsuario = "SELECT * FROM CLIENTE";
+            String queryUsuario = "SELECT USER FROM CLIENTE WHERE USUARIO= '" + usuario + "'";
             String queryContrasenya = "SELECT PASSW FROM CLIENTE WHERE PASSW= '" + pass + "'";
             String queryid = "SELECT ID_CLIENTE FROM CLIENTE WHERE USUARIO= '" + usuario + "'"
                     + " AND PASSW= '" + pass + "'";

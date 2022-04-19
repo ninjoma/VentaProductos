@@ -41,9 +41,10 @@ public class Menu {
             utils.clearScreen();
             Store();
         }
+        utils.clearScreen();
         switch(seleccion){
             case 1:
-                    
+                    Search();
                 break;
             case 2:
                 
@@ -62,14 +63,25 @@ public class Menu {
         Producto searchedProduct = db.buscarProducto(productName);
         if(searchedProduct == null){
             System.out.println("El producto especificado no pudo ser encontrado.");
-            System.out.println("¿Desea volver al menú (1) o buscar otra cosa (2)?");
+            System.out.println("¿Desea volver al menú (1) o buscar otro producto (2)?");
             int seleccion = Entrada.RequestNumber(">");
-            if(!(seleccion > 0 && seleccion < 2)){
-                
-            
+            while(!(seleccion > 0 && seleccion < 3)){
+                System.out.println("Introduce 1 para volver al menú o 2 para buscar"
+                        + " otro producto");
+                seleccion = Entrada.RequestNumber(">");
+            }
+            switch(seleccion){
+                case 1:
+                    Store();
+                    break;
+                case 2:
+                    Search();
+                    break;
             }
         } else {
-            
+            utils.clearScreen();
+            System.out.println("¡Producto encontrado!");
+            System.out.println(searchedProduct.toString());
         }
     }
     

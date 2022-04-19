@@ -16,13 +16,13 @@ public class Menu {
         Login();
     }
     private void Login(){
+        utils.clearScreen();
         System.out.println("¡Bienvenido a NullSoft, tu todo a cien online de confianza!");
         System.out.println("Introduzca su usuario: ");
         String usuario = Entrada.RequestString(">");
         System.out.println("Introduzca su contraseña: ");
         String pass = Entrada.RequestString(">");
         user = db.validarLogin(usuario, pass);
-        utils.clearScreen();
         if(user != null){
             Store();
         } else {
@@ -55,6 +55,7 @@ public class Menu {
         
     }
     private void Search(){
+        utils.clearScreen();
         System.out.println("Buscador de productos:");
         System.out.println(utils.Spacer());
         System.out.println("Introduzca el nombre del producto a buscar:");

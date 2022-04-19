@@ -22,6 +22,7 @@ public class Entrada {
             } catch(InputMismatchException Ex) {
                 System.out.println("Has introducido un número inválido. Por favor,"
                         + " inténtalo de nuevo.");
+                result = null;
             }            
         }
        return (int) result;
@@ -35,6 +36,7 @@ public class Entrada {
             } catch(Exception Ex) {
                 System.out.println("Has introducido una String inválida. Por favor,"
                         + " inténtalo de nuevo.");
+                result = "";
             }
         }
        return result;

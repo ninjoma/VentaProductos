@@ -37,26 +37,25 @@ public class DB {
         int clienteID;
         try {
             Statement stmt = conn.createStatement();
-            String queryUsuario = "SELECT USER FROM CLIENTE WHERE USUARIO= '" + usuario + "'";
-            String queryContrasenya = "SELECT PASSW FROM CLIENTE WHERE PASSW= '" + pass + "'";
-            String queryid = "SELECT ID_CLIENTE FROM CLIENTE WHERE USUARIO= '" + usuario + "'"
-                    + " AND PASSW= '" + pass + "'";
-            ResultSet rs = stmt.executeQuery(queryUsuario);
+            String query = "SELECT USER FROM CLIENTE WHERE USUARIO= '" + usuario + "'";
+            ResultSet rs = stmt.executeQuery(query);
 
             if (rs.next() == false) {
                 return null;
             } else {
-                rs = stmt.executeQuery(queryContrasenya);
+                query = "SELECT PASSW FROM CLIENTE WHERE PASSW= '" + pass + "'";
+                rs = stmt.executeQuery(query);
                 if (rs.next() == false) {
                     System.out.println("Contraseña incorrecta");
                     return null;
                 } else {
                     System.out.println("El usuario existe");
-                    rs = stmt.executeQuery(queryid);
+                    query = "SELECT ID_CLIENTE FROM CLIENTE WHERE USUARIO= '" + usuario + "'"
+                            + " AND PASSW= '" + pass + "'";
+                    rs = stmt.executeQuery(query);
                     rs.next();
                     clienteID = ((Number) rs.getObject(1)).intValue();
                     Usuario user = new Usuario(usuario, pass, clienteID);
-                    System.out.println("El usuario existe");
                     return user;
                 }
             }
@@ -70,13 +69,12 @@ public class DB {
     public Producto buscarProducto(String productName) {
         try {
             Statement stmt = conn.createStatement();
-            String queryProductName = "SELECT NOMBRE FROM PRODUCTO WHERE NOMBRE= '" + productName + "'";
-            String query = "SELECT ID_PRODUCTO, NOMBRE, PRECIO, DESCRIPCION FROM PRODUCTO WHERE NOMBRE = '" + productName + "'";
-            ResultSet rs = stmt.executeQuery(queryProductName);
-
+            String query = "SELECT NOMBRE FROM PRODUCTO WHERE NOMBRE= '" + productName + "'";
+            ResultSet rs = stmt.executeQuery(query);
             if (rs.next() == false) {
                 return null;
             } else {
+                query = "SELECT ID_PRODUCTO, NOMBRE, PRECIO, DESCRIPCION FROM PRODUCTO WHERE NOMBRE = '" + productName + "'";
                 rs = stmt.executeQuery(query);
                 while (rs.next()) {
                     String id_producto = rs.getString(1);

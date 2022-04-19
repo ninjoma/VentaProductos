@@ -25,7 +25,7 @@ public class utils {
         }
         robot = tmp;
     }
-    public static void clearScreen(){
+    public synchronized static void clearScreen(){
         robot.keyPress(17);
         robot.keyPress(76);
         robot.keyRelease(17);

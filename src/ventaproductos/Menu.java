@@ -31,6 +31,7 @@ public class Menu {
         }
     }
     private void Store(){
+        utils.clearScreen();
         System.out.println("Tienda NullSoft -------------------- Hola, USUARIO " + user.getUsuario());
         System.out.println("Escribe un número para acceder a cada menú:");
         System.out.println("1 - Buscar un producto. ");
@@ -38,10 +39,8 @@ public class Menu {
         System.out.println("3 - Salir.");
         int seleccion = Entrada.RequestNumber(">");
         if(!(seleccion > 0 && seleccion < 4)){
-            utils.clearScreen();
             Store();
         }
-        utils.clearScreen();
         switch(seleccion){
             case 1:
                 Search();

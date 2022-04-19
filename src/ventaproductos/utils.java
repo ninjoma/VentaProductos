@@ -7,8 +7,6 @@ package ventaproductos;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

@@ -22,11 +22,11 @@ public class Producto {
     @Override
     public String toString() {
         String preciofinal = precio + ",00 €";
-        return "------------------------------------------------------------" + System.lineSeparator() +
+        return utils.Spacer() + System.lineSeparator() +
         nombre + utils.spaceGenerator(60 - nombre.length() - preciofinal.length()) + preciofinal + System.lineSeparator() +
         "Descripción: " + System.lineSeparator()
         + utils.FormattingDetector(desc, 60) + System.lineSeparator() +
-        "------------------------------------------------------------";
+        utils.Spacer();
                
     }
     

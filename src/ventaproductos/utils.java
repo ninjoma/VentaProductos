@@ -51,4 +51,7 @@ public class utils {
             return formattedtext.substring(0,formattedtext.length() -1);
         }
     }
+    public static String Spacer(){
+        return "------------------------------------------------------------";
+    }
 }

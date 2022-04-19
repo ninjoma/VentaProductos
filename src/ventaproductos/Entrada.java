@@ -27,9 +27,9 @@ public class Entrada {
        return (int) result;
     }
     public static String RequestString(String prevtext){
-        String result = null;
+        String result = "";
         System.out.print("" + prevtext);
-        while(result == null){
+        while(result.equals("")){
             try{
                 result = sc.nextLine();
             } catch(Exception Ex) {

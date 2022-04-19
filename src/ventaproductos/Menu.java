@@ -44,7 +44,7 @@ public class Menu {
         utils.clearScreen();
         switch(seleccion){
             case 1:
-                    Search();
+                Search();
                 break;
             case 2:
                 
@@ -82,6 +82,7 @@ public class Menu {
             utils.clearScreen();
             System.out.println("¡Producto encontrado!");
             System.out.println(searchedProduct.toString());
+            System.out.println("¿Es este el producto que buscabas?");
         }
     }
     

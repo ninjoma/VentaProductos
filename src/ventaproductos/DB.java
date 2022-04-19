@@ -6,6 +6,7 @@ package ventaproductos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.JDBCType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -65,7 +66,33 @@ public class DB {
 
         return null;
     }
-    public Producto buscarProducto(String productName){
-        
+
+    public Producto buscarProducto(String productName) {
+        try {
+            Statement stmt = conn.createStatement();
+            String queryProductName = "SELECT NOMBRE FROM PRODUCTO WHERE NOMBRE= '" + productName + "'";
+            String query = "SELECT ID_PRODUCTO, NOMBRE, PRECIO, DESCRIPCION FROM PRODUCTO WHERE NOMBRE = '" + productName + "'";
+            ResultSet rs = stmt.executeQuery(queryProductName);
+
+            if (rs.next() == false) {
+                return null;
+            } else {
+                rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    String id_producto = rs.getString(1);
+                    id_producto = id_producto.toString();
+                    int id_pr = Integer.parseInt(id_producto);
+                    String nombre = rs.getString(2);
+                    int precio = ((Number) rs.getObject(3)).intValue();
+                    String descripcion = rs.getString(4);
+                    Producto pr = new Producto(id_pr, nombre, precio, descripcion);
+                    return pr;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

@@ -25,11 +25,12 @@ public class utils {
         }
         robot = tmp;
     }
-    public synchronized static void clearScreen(){
+    public static void clearScreen(){
         robot.keyPress(17);
         robot.keyPress(76);
         robot.keyRelease(17);
         robot.keyRelease(76);
+        robot.delay(100);
     }
     public static void waitforEnter(){
         try {

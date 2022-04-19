@@ -7,22 +7,29 @@ package ventaproductos;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author A8-PC79
  */
 public class utils {
-    public static void clearScreen(){
+    private static final Robot robot;
+    static {
+        Robot tmp = null;
         try {
-            Robot robot = new Robot();
-            robot.keyPress(17);
-            robot.keyPress(76);
-            robot.keyRelease(17);
-            robot.keyRelease(76);
-        }catch (AWTException e){
-            e.printStackTrace();
+            tmp = new Robot();
+        } catch (AWTException ex) {
+           
         }
+        robot = tmp;
+    }
+    public static void clearScreen(){
+        robot.keyPress(17);
+        robot.keyPress(76);
+        robot.keyRelease(17);
+        robot.keyRelease(76);
     }
     public static void waitforEnter(){
         try {

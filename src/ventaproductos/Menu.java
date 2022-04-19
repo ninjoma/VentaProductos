@@ -18,9 +18,9 @@ public class Menu {
     private void Login(){
         System.out.println("¡Bienvenido a NullSoft, tu todo a cien online de confianza!");
         System.out.println("Introduzca su usuario: ");
-        String usuario = Entrada.RequestString();
+        String usuario = Entrada.RequestString(">");
         System.out.println("Introduzca su contraseña: ");
-        String pass = Entrada.RequestString();
+        String pass = Entrada.RequestString(">");
         user = db.validarLogin(usuario, pass);
         utils.clearScreen();
         if(user != null){
@@ -36,13 +36,14 @@ public class Menu {
         System.out.println("1 - Buscar un producto. ");
         System.out.println("2 - Ajustes de cuenta.");
         System.out.println("3 - Salir.");
-        int seleccion = Entrada.RequestNumber();
+        int seleccion = Entrada.RequestNumber(">");
         if(!(seleccion > 0 && seleccion < 4)){
+            utils.clearScreen();
             Store();
         }
         switch(seleccion){
             case 1:
-                
+                    
                 break;
             case 2:
                 
@@ -52,6 +53,24 @@ public class Menu {
                 break;
         }
         
+    }
+    private void Search(){
+        System.out.println("Buscador de productos:");
+        System.out.println(utils.Spacer());
+        System.out.println("Introduzca el nombre del producto a buscar:");
+        String productName = Entrada.RequestString(">");
+        Producto searchedProduct = db.buscarProducto(productName);
+        if(searchedProduct == null){
+            System.out.println("El producto especificado no pudo ser encontrado.");
+            System.out.println("¿Desea volver al menú (1) o buscar otra cosa (2)?");
+            int seleccion = Entrada.RequestNumber(">");
+            if(!(seleccion > 0 && seleccion < 2)){
+                
+            
+            }
+        } else {
+            
+        }
     }
     
 }

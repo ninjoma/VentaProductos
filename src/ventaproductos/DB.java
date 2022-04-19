@@ -66,5 +66,7 @@ public class DB {
 
         return null;
     }
-
+    public Producto buscarProducto(String productName){
+        
+    }
 }

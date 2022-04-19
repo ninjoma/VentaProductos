@@ -13,8 +13,9 @@ import java.util.Scanner;
  */
 public class Entrada {
     private static Scanner sc = new Scanner(System.in);
-    public static int RequestNumber(){
+    public static int RequestNumber(String prevtext){
         Integer result = null;
+        System.out.print("" + prevtext);
         while(result == null){
             try{
                 result = sc.nextInt();
@@ -25,8 +26,9 @@ public class Entrada {
         }
        return (int) result;
     }
-    public static String RequestString(){
+    public static String RequestString(String prevtext){
         String result = null;
+        System.out.print("" + prevtext);
         while(result == null){
             try{
                 result = sc.nextLine();

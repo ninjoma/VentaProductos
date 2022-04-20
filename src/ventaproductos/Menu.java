@@ -14,12 +14,56 @@ public class Menu {
     private Usuario user;
 
     public Menu() {
-        Login();
+        EnterWebsite();
     }
 
+    private void EnterWebsite(){
+        utils.clearScreen();
+        System.out.println("¡Bienvenido a NullSoft! Escribe 1 para loguearte o "
+                + " 2 para registrarte");
+        int seleccion = Entrada.RequestNumber(">");
+        if (!(seleccion > 0 && seleccion < 3)) {
+            EnterWebsite();
+        }
+        switch (seleccion) {
+            case 1:
+                Login();
+                break;
+            case 2:
+                Register();
+                break;
+        }
+    }
+
+    private void Register(){
+        utils.clearScreen();
+        System.out.println("Registro:");
+        System.out.println("Introduce un usuario:");
+        String usuario = Entrada.RequestString(">");
+        System.out.println("Introduce una contraseña:");
+        String pass = Entrada.RequestString(">");
+        System.out.println("Introduce tu nombre:");
+        String nombre = Entrada.RequestString(">");
+        System.out.println("Introduce tu apellido:");
+        String apellido = Entrada.RequestString(">");
+        System.out.println("Introduce tu edad:");
+        int edad = Entrada.RequestNumber(">");
+        if(db.registroUsuario(usuario, pass, nombre, apellido, edad)){
+            System.out.println("¡Usuario Creado satisfactoriamente! Vuelve"
+                    + " a loguearte con tus datos. Pulsa Enter para Continuar.");
+            utils.waitforEnter();
+            Login();
+        } else {
+            System.out.println("Pulsar Enter te devolverá a la pantalla de selección.");
+            utils.waitforEnter();
+            EnterWebsite();
+        }
+        
+    }
+    
     private void Login() {
         utils.clearScreen();
-        System.out.println("¡Bienvenido a NullSoft, tu todo a cien online de confianza!");
+        System.out.println("Login:");
         System.out.println("Introduzca su usuario: ");
         String usuario = Entrada.RequestString(">");
         System.out.println("Introduzca su contraseña: ");
@@ -49,7 +93,7 @@ public class Menu {
                 Search();
                 break;
             case 2:
-
+                ModifyAccount();
                 break;
             case 3:
 
@@ -89,5 +133,8 @@ public class Menu {
             System.out.println("¿Es este el producto que buscabas?");
         }
     }
-
+    private void ModifyAccount(){
+        
+        System.out.println("");
+    }
 }

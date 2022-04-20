@@ -158,7 +158,19 @@ public class DB {
     }
     
     public boolean borrarProducto(String nombreProducto){
-        
+        try{
+            Statement stmt = conn.createStatement();
+            String query = "DELETE FROM PRODUCTO WHERE NOMBRE='"+nombreProducto+"'";
+            ResultSet rs = stmt.executeQuery(query);
+            if(rs.next()==false){
+                return false;
+            }else{
+                System.out.println("Borrado correctamente");
+                return true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
         return false;
     }
 }

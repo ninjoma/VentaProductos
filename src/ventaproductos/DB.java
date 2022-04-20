@@ -131,20 +131,27 @@ public class DB {
             System.out.println("Introduce tus nuevos datos, vamos a actualizarlos");
             System.out.println("Introduce tu nuevo usuario");
             String usuario = sc.nextLine();
-            System.out.println("Introduce tu nueva contraseña");
-            String contrasenya = sc.nextLine();
-            System.out.println("Introduce tu edad");
-            int edad = sc.nextInt();
-
-            String query = "UPDATE CLIENTE SET USUARIO='" + usuario + "', PASSW='" + contrasenya + "', EDAD=" + edad + " WHERE ID_CLIENTE=" + id_cliente + "";
+            String query = "SELECT USUARIO FROM CLIENTE WHERE USUARIO='" + usuario + "'";
             ResultSet rs = stmt.executeQuery(query);
             if (rs.next() == false) {
-                System.out.println("No se pudo modificar el usuario");
-                return false;
+                System.out.println("Introduce tu nueva contraseña");
+                String contrasenya = sc.nextLine();
+                System.out.println("Introduce tu edad");
+                int edad = sc.nextInt();
+
+                query = "UPDATE CLIENTE SET USUARIO='" + usuario + "', PASSW='" + contrasenya + "', EDAD=" + edad + " WHERE ID_CLIENTE=" + id_cliente + "";
+                 rs = stmt.executeQuery(query);
+                if (rs.next() == false) {
+                    System.out.println("No se pudo modificar el usuario");
+                    return false;
+                } else {
+                    System.out.println("Usuario modificado");
+                    return true;
+                }
             } else {
-                System.out.println("Usuario modificado");
-                return true;
+                System.out.println("Este usuario ya existe");
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

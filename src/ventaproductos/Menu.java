@@ -4,18 +4,20 @@
  */
 package ventaproductos;
 
-
 /**
  *
  * @author A8-PC79
  */
 public class Menu {
+
     private DB db = new DB();
     private Usuario user;
-    public Menu(){
+
+    public Menu() {
         Login();
     }
-    private void Login(){
+
+    private void Login() {
         utils.clearScreen();
         System.out.println("¡Bienvenido a NullSoft, tu todo a cien online de confianza!");
         System.out.println("Introduzca su usuario: ");
@@ -23,14 +25,15 @@ public class Menu {
         System.out.println("Introduzca su contraseña: ");
         String pass = Entrada.RequestString(">");
         user = db.validarLogin(usuario, pass);
-        if(user != null){
+        if (user != null) {
             Store();
         } else {
             System.out.println("¡El usuario no existe! Inténtalo de nuevo");
             Login();
         }
     }
-    private void Store(){
+
+    private void Store() {
         utils.clearScreen();
         System.out.println("Tienda NullSoft -------------------- Hola, USUARIO " + user.getUsuario());
         System.out.println("Escribe un número para acceder a cada menú:");
@@ -38,39 +41,40 @@ public class Menu {
         System.out.println("2 - Ajustes de cuenta.");
         System.out.println("3 - Salir.");
         int seleccion = Entrada.RequestNumber(">");
-        if(!(seleccion > 0 && seleccion < 4)){
+        if (!(seleccion > 0 && seleccion < 4)) {
             Store();
         }
-        switch(seleccion){
+        switch (seleccion) {
             case 1:
                 Search();
                 break;
             case 2:
-                
+
                 break;
             case 3:
-                
+
                 break;
         }
-        
+
     }
-    private void Search(){
+
+    private void Search() {
         utils.clearScreen();
         System.out.println("Buscador de productos:");
         System.out.println(utils.Spacer());
         System.out.println("Introduzca el nombre del producto a buscar:");
         String productName = Entrada.RequestString(">");
         Producto searchedProduct = db.buscarProducto(productName);
-        if(searchedProduct == null){
+        if (searchedProduct == null) {
             System.out.println("El producto especificado no pudo ser encontrado.");
             System.out.println("¿Desea volver al menú (1) o buscar otro producto (2)?");
             int seleccion = Entrada.RequestNumber(">");
-            while(!(seleccion > 0 && seleccion < 3)){
+            while (!(seleccion > 0 && seleccion < 3)) {
                 System.out.println("Introduce 1 para volver al menú o 2 para buscar"
                         + " otro producto");
                 seleccion = Entrada.RequestNumber(">");
             }
-            switch(seleccion){
+            switch (seleccion) {
                 case 1:
                     Store();
                     break;
@@ -85,5 +89,5 @@ public class Menu {
             System.out.println("¿Es este el producto que buscabas?");
         }
     }
-    
+
 }

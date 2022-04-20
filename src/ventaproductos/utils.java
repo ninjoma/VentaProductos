@@ -44,8 +44,7 @@ public class utils {
         return spaces;
     }
     public static String FormattingDetector(String inputString, int breakline){
-        
-        System.out.println(Math.floor(inputString.length()/breakline));
+       
         if(inputString.length() <= breakline){
             return inputString;
         } else {

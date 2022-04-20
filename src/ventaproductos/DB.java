@@ -17,7 +17,7 @@ import java.sql.Statement;
  */
 public class DB {
 
-    private Connection conn;
+    public static Connection conn;
 
     public DB() {
         try {
@@ -69,20 +69,19 @@ public class DB {
     public Producto buscarProducto(String productName) {
         try {
             Statement stmt = conn.createStatement();
-            String query = "SELECT NOMBRE FROM PRODUCTO WHERE NOMBRE= '" + productName + "'";
+            String query = "SELECT NOMBRE FROM PRODUCTO WHERE NOMBRE= '" + productName.toUpperCase()+ "'";
             ResultSet rs = stmt.executeQuery(query);
             if (rs.next() == false) {
                 return null;
             } else {
-                query = "SELECT ID_PRODUCTO, NOMBRE, PRECIO, DESCRIPCION FROM PRODUCTO WHERE NOMBRE = '" + productName + "'";
+                query = "SELECT ID_PRODUCTO, NOMBRE, PRECIO, DESCRIPCION FROM PRODUCTO WHERE NOMBRE = '" + productName.toUpperCase() + "'";
                 rs = stmt.executeQuery(query);
                 while (rs.next()) {
-                    String id_producto = rs.getString(1);
-                    id_producto = id_producto.toString();
-                    int id_pr = Integer.parseInt(id_producto);
-                    String nombre = rs.getString(2);
-                    int precio = ((Number) rs.getObject(3)).intValue();
-                    String descripcion = rs.getString(4);
+                    String id_producto = rs.getNString("ID_PRODUCTO");
+                    int id_pr = rs.getInt("ID_PRODUCTO");
+                    String nombre = rs.getNString("NOMBRE");
+                    int precio = rs.getInt("PRECIO");
+                    String descripcion = rs.getNString("DESCRIPCION");
                     Producto pr = new Producto(id_pr, nombre, precio, descripcion);
                     return pr;
                 }
@@ -92,5 +91,40 @@ public class DB {
         }
 
         return null;
+    }
+
+    public boolean registroUsuario(String usuario, String pass, String nombre, String apellido, int edad) { //Si =false no se pudo registrar
+        int id_cliente;
+        try {
+            Statement stmt = conn.createStatement();
+            String query = "SELECT USUARIO FROM CLIENTE WHERE USUARIO = '" + usuario + "'";
+            ResultSet rs = stmt.executeQuery(query);
+            if (rs.next() != false) {
+                String comprobarUser = rs.getNString("USUARIO");
+                if (comprobarUser.equals(usuario)) {
+                    System.out.println("Este usuario ya existe");
+                    return false;
+                }
+            } else {
+                query = "SELECT COUNT(*) FROM CLIENTE";
+                rs = stmt.executeQuery(query);
+                rs.next();
+                id_cliente = rs.getInt(1) + 1;
+                query = "INSERT INTO CLIENTE "
+                        + "VALUES (" + id_cliente + ", '" + nombre + "', '" + apellido + "', " + edad + ", " + 0 + ", '" + usuario + "', '" + pass + "', " + 0 + ")";
+                rs.next();
+                rs = stmt.executeQuery(query);
+                System.out.println("Usuario creado correctamente");
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean modificarUser(){
+        
+        return true;
     }
 }

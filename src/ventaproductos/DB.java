@@ -138,9 +138,8 @@ public class DB {
                 String contrasenya = sc.nextLine();
                 System.out.println("Introduce tu edad");
                 int edad = sc.nextInt();
-
                 query = "UPDATE CLIENTE SET USUARIO='" + usuario + "', PASSW='" + contrasenya + "', EDAD=" + edad + " WHERE ID_CLIENTE=" + id_cliente + "";
-                 rs = stmt.executeQuery(query);
+                rs = stmt.executeQuery(query);
                 if (rs.next() == false) {
                     System.out.println("No se pudo modificar el usuario");
                     return false;
@@ -155,6 +154,11 @@ public class DB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
+    }
+    
+    public boolean borrarProducto(String nombreProducto){
+        
         return false;
     }
 }

@@ -29,5 +29,10 @@ public class Producto {
         utils.Spacer();
                
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+    
     
 }

@@ -166,9 +166,9 @@ public class Menu {
             }
             switch (seleccion) {
                 case 1:
-                    System.out.println("¡Has comprado" + searchedProduct.getNombre() + "!");
+                    System.out.println("¡Has comprado " + searchedProduct.getNombre() + "!");
                     System.out.println("¡Gracias por confiar en Null Soft!");
-                    System.out.println("Pulsa el espacio para volver al menú.");
+                    System.out.println("Pulsa el ENTER para volver al menú.");
                     utils.waitforEnter();
                     UserStore();
                     break;

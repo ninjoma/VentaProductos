@@ -49,11 +49,13 @@ public class utils {
             return inputString;
         } else {
             String formattedtext = "";
-            for (int i = 0; i < Math.floor(inputString.length()/breakline); i++) {
-                formattedtext += inputString.substring((breakline*i), (breakline*(i+1)))
-                               + System.lineSeparator();
+            int lines = (int) Math.floor(inputString.length()/breakline);
+            for (int i = 0; i < lines; i++) {
+                formattedtext += inputString.substring((breakline*i),(breakline*(i+1))) + System.lineSeparator();
             }
-            return formattedtext.substring(0,formattedtext.length() -1);
+            formattedtext += inputString.substring((lines*breakline), inputString.length());
+            return formattedtext;
+            //return formattedtext.substring(0,formattedtext.length() -1);
         }
     }
     public static String Spacer(){

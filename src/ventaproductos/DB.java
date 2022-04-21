@@ -51,12 +51,16 @@ public class DB {
                     return null;
                 } else {
                     System.out.println("El usuario existe");
-                    query = "SELECT ID_CLIENTE FROM CLIENTE WHERE USUARIO= '" + usuario + "'"
+                    query = "SELECT ID_CLIENTE,ESADMIN FROM CLIENTE WHERE USUARIO= '" + usuario + "'"
                             + " AND PASSW= '" + pass + "'";
                     rs = stmt.executeQuery(query);
                     rs.next();
                     clienteID = ((Number) rs.getObject(1)).intValue();
-                    boolean esAdmin = rs.getBoolean("ESADMIN");
+                    int admin = rs.getInt("ESADMIN");
+                    boolean esAdmin = false;
+                    if (admin == 1) {
+                         esAdmin = true;
+                    }
                     Usuario user = new Usuario(usuario, pass, esAdmin, clienteID);
                     return user;
                 }
@@ -125,7 +129,7 @@ public class DB {
         return false;
     }
 
-    public boolean modificarUser(int id_cliente, String usuario, String  pass, int edad) {
+    public boolean modificarUser(int id_cliente, String usuario, String pass, int edad) {
         try {
             Scanner sc = new Scanner(System.in);
             Statement stmt = conn.createStatement();
@@ -152,18 +156,19 @@ public class DB {
         }
         return false;
     }
-    
-    public boolean borrarProducto(String nombreProducto){
-        try{
+
+    public boolean borrarProducto(String nombreProducto) {
+        try {
+
             Statement stmt = conn.createStatement();
-            String query = "DELETE FROM PRODUCTO WHERE NOMBRE='"+nombreProducto+"'";
+            String query = "DELETE FROM PRODUCTO WHERE NOMBRE='" + nombreProducto + "'";
             ResultSet rs = stmt.executeQuery(query);
-            if(rs.next()==false){
+            if (rs.next() == false) {
                 return false;
-            }else{
+            } else {
                 return true;
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;

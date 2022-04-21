@@ -159,6 +159,26 @@ public class Menu {
             System.out.println("¡Producto encontrado!");
             System.out.println(searchedProduct.toString());
             System.out.println("¿Es este el producto que buscabas?");
+            System.out.println("Escribe 1 para COMPRAR, 2 para volver a buscar o 3 para volver al menú");
+            int seleccion = Entrada.RequestNumber(">");
+            if (!(seleccion > 0 && seleccion < 4)) {
+                seleccion = 1;
+            }
+            switch (seleccion) {
+                case 1:
+                    System.out.println("¡Has comprado" + searchedProduct.getNombre() + "!");
+                    System.out.println("¡Gracias por confiar en Null Soft!");
+                    System.out.println("Pulsa el espacio para volver al menú.");
+                    utils.waitforEnter();
+                    UserStore();
+                    break;
+                case 2:
+                    Search();
+                    break;
+                case 3:
+                    UserStore();
+                    break;
+            }
         }
     }
     

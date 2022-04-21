@@ -12,14 +12,24 @@ public class Usuario {
     private String usuario;
     private String pass;
     private int cliente_id;
-    public Usuario(String usuario, String pass, int cliente_id){
+    private boolean esAdmin;
+    public Usuario(String usuario, String pass, boolean esAdmin, int cliente_id){
         this.usuario = usuario;
         this.pass = pass;
         this.cliente_id = cliente_id;
+        this.esAdmin = esAdmin;
     }
 
     public String getUsuario() {
         return usuario;
     }
 
+    public boolean isEsAdmin() {
+        return esAdmin;
+    }
+
+    public int getCliente_id() {
+        return cliente_id;
+    }
+    
 }

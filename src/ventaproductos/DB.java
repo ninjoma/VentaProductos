@@ -124,21 +124,16 @@ public class DB {
         return false;
     }
 
-    public boolean modificarUser(int id_cliente) {
+    public boolean modificarUser(int id_cliente, String usuario, String  pass, int edad) {
         try {
             Scanner sc = new Scanner(System.in);
             Statement stmt = conn.createStatement();
             System.out.println("Introduce tus nuevos datos, vamos a actualizarlos");
             System.out.println("Introduce tu nuevo usuario");
-            String usuario = sc.nextLine();
             String query = "SELECT USUARIO FROM CLIENTE WHERE USUARIO='" + usuario + "'";
             ResultSet rs = stmt.executeQuery(query);
             if (rs.next() == false) {
-                System.out.println("Introduce tu nueva contraseña");
-                String contrasenya = sc.nextLine();
-                System.out.println("Introduce tu edad");
-                int edad = sc.nextInt();
-                query = "UPDATE CLIENTE SET USUARIO='" + usuario + "', PASSW='" + contrasenya + "', EDAD=" + edad + " WHERE ID_CLIENTE=" + id_cliente + "";
+                query = "UPDATE CLIENTE SET USUARIO='" + usuario + "', PASSW='" + pass + "', EDAD=" + edad + " WHERE ID_CLIENTE=" + id_cliente + "";
                 rs = stmt.executeQuery(query);
                 if (rs.next() == false) {
                     System.out.println("No se pudo modificar el usuario");
@@ -165,7 +160,6 @@ public class DB {
             if(rs.next()==false){
                 return false;
             }else{
-                System.out.println("Borrado correctamente");
                 return true;
             }
         }catch(SQLException e){

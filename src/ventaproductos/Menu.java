@@ -70,14 +70,44 @@ public class Menu {
         String pass = Entrada.RequestString(">");
         user = db.validarLogin(usuario, pass);
         if (user != null) {
-            Store();
+            if(user.isEsAdmin()){
+                AdminMenu();
+            } else {
+                UserStore();
+            }
         } else {
             System.out.println("¡El usuario no existe! Inténtalo de nuevo");
             Login();
         }
     }
 
-    private void Store() {
+    private void AdminMenu(){
+        utils.clearScreen();
+        System.out.println("Tienda NullSoft -------------------- Hola, ADMINISTRADOR " + user.getUsuario());
+        System.out.println("Escribe un número para acceder a cada menú:");
+        System.out.println("1 - Eliminar un producto. ");
+        System.out.println("2 - Ajustes de cuenta.");
+        System.out.println("3 - Salir.");
+        int seleccion = Entrada.RequestNumber(">");
+        if (!(seleccion > 0 && seleccion < 4)) {
+            UserStore();
+        }
+        switch (seleccion) {
+            case 1:
+                DeleteProduct();
+                break;
+            case 2:
+                ModifyAccount();
+                break;
+            case 3:
+                Exit();
+                break;
+        }
+    }
+    
+    
+    
+    private void UserStore() {
         utils.clearScreen();
         System.out.println("Tienda NullSoft -------------------- Hola, USUARIO " + user.getUsuario());
         System.out.println("Escribe un número para acceder a cada menú:");
@@ -86,7 +116,7 @@ public class Menu {
         System.out.println("3 - Salir.");
         int seleccion = Entrada.RequestNumber(">");
         if (!(seleccion > 0 && seleccion < 4)) {
-            Store();
+            UserStore();
         }
         switch (seleccion) {
             case 1:
@@ -96,7 +126,7 @@ public class Menu {
                 ModifyAccount();
                 break;
             case 3:
-
+                Exit();
                 break;
         }
 
@@ -113,14 +143,12 @@ public class Menu {
             System.out.println("El producto especificado no pudo ser encontrado.");
             System.out.println("¿Desea volver al menú (1) o buscar otro producto (2)?");
             int seleccion = Entrada.RequestNumber(">");
-            while (!(seleccion > 0 && seleccion < 3)) {
-                System.out.println("Introduce 1 para volver al menú o 2 para buscar"
-                        + " otro producto");
-                seleccion = Entrada.RequestNumber(">");
+            if (!(seleccion > 0 && seleccion < 3)) {
+                seleccion = 1;
             }
             switch (seleccion) {
                 case 1:
-                    Store();
+                    UserStore();
                     break;
                 case 2:
                     Search();
@@ -133,8 +161,59 @@ public class Menu {
             System.out.println("¿Es este el producto que buscabas?");
         }
     }
+    
+    private void DeleteProduct(){
+        utils.clearScreen();
+        System.out.println("Eliminador de productos:");
+        System.out.println(utils.Spacer());
+        System.out.println("Introduzca el nombre del producto a eliminar:");
+        String productName = Entrada.RequestString(">");
+        boolean transactionResult = db.borrarProducto(productName);
+        if(transactionResult == true){
+            System.out.println("El producto se eliminó satisfactoriamente.");
+            System.out.println("¿Quieres eliminar otro producto?");
+        } else {
+            System.out.println("No se encontró el producto especificado.");
+        }
+        System.out.println("Introduce 1 para volver al menú o 2 para eliminar"
+                        + " otro producto");
+        int seleccion = Entrada.RequestNumber(">");
+            if (!(seleccion > 0 && seleccion < 3)) {
+                seleccion = 1;
+            }
+            switch (seleccion) {
+                case 1:
+                    AdminMenu();
+                    break;
+                case 2:
+                    DeleteProduct();
+                    break;
+            }
+    }
+    
+    
+    
     private void ModifyAccount(){
-        
-        System.out.println("");
+        System.out.println("Formulario para modificar la cuenta de usuario:");
+        System.out.println("Introduce tu nuevo usuario, " + user.getUsuario() + ":");
+        String usuario = Entrada.RequestString(">");
+        System.out.println("Introduce tu nueva contraseña: ");
+        String pass = Entrada.RequestString(">");
+        System.out.println("Introduce tu edad: ");
+        int edad = Entrada.RequestNumber(">");
+        if(db.modificarUser(user.getCliente_id(), usuario, pass, edad) == true){
+            System.out.println("¡Usuario modificado satisfactoriamente!");
+        } else {
+            System.out.println("Hubo un problema con la actualización de la cuenta"
+                    + "de usuario.");
+        }
+        System.out.println("Volviendo a la pantalla de inicio de sesión");
+        System.out.println("Pulsa ENTER para continuar...");
+        utils.waitforEnter();
+    }
+    
+    private void Exit(){
+        System.out.println("¡Gracias por confiar en NullSoft!");
+        System.out.println("¡Que tenga un buen día!");
     }
 }

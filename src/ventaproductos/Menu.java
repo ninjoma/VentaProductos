@@ -90,7 +90,7 @@ public class Menu {
         System.out.println("3 - Salir.");
         int seleccion = Entrada.RequestNumber(">");
         if (!(seleccion > 0 && seleccion < 4)) {
-            UserStore();
+            AdminMenu();
         }
         switch (seleccion) {
             case 1:
@@ -210,6 +210,8 @@ public class Menu {
         System.out.println("Volviendo a la pantalla de inicio de sesión");
         System.out.println("Pulsa ENTER para continuar...");
         utils.waitforEnter();
+        EnterWebsite();
+        user = null;
     }
     
     private void Exit(){

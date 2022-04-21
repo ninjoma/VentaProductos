@@ -56,7 +56,8 @@ public class DB {
                     rs = stmt.executeQuery(query);
                     rs.next();
                     clienteID = ((Number) rs.getObject(1)).intValue();
-                    Usuario user = new Usuario(usuario, pass, clienteID);
+                    boolean esAdmin = rs.getBoolean("ESADMIN");
+                    Usuario user = new Usuario(usuario, pass, esAdmin, clienteID);
                     return user;
                 }
             }
